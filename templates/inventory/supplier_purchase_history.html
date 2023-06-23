@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+    
+<div class="container">
+    <div class="row">
+        
+{% for item in purchase_history %}
+    <h3>{{ item.supplier.name }}</h3>
+    <div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>Product</th>
+            <th>Unit price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Date Purchased</th>
+        </tr>
+        <tr>
+    {% for purchase in item.purchases %}
+            <td>{{ purchase.product.name }}</td>
+            <td>{{purchase.unit_price|intcomma}}</td>
+            <td>{{purchase.quantity}}</td>
+            <td>{{purchase.get_total_price|intcomma}}</td>
+            <td>{{ purchase.purchase_date }}</td>
+        
+    {% endfor %}
+        </tr>
+    </table>
+    </div>
+{% endfor %}
+        
+</div>
+</div>
+{% endblock %}

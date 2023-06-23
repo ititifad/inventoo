@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+
+
+<h2>{{ store.name }}</h2>
+<p>{{ store.address }}</p>
+<h3>Products:</h3>
+<ul>
+  {% for product in products %}
+    <li>
+      <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+    </li>
+  {% empty %}
+    <li>No products available.</li>
+  {% endfor %}
+</ul>
+
+
+{% endblock %}

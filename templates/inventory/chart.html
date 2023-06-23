@@ -1,0 +1,36 @@
+<script>
+    // Fetch stock data from the server
+    fetch('/stock_data/')
+        .then(response => response.json())
+        .then(data => {
+            const ctx = document.getElementById('stockChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Stock',
+                        data: data.quantity,
+                        backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)'
+                            ],
+                        borderColor: 'white',
+                        borderWidth: 1,
+                        hoverOffset: 4,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+</script>

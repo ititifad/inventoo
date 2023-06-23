@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+
+<h2>{{ product.name }}</h2>
+<p>{{ product.description }}</p>
+<h3>Purchases:</h3>
+<ul>
+  {% for purchase in purchases %}
+    <li>{{ purchase.purchase_date }} - Quantity: {{ purchase.quantity }}</li>
+  {% empty %}
+    <li>No purchases available.</li>
+  {% endfor %}
+</ul>
+<h3>Sales:</h3>
+<ul>
+  {% for sale in sales %}
+    <li>{{ sale.sale_date }} - Quantity: {{ sale.quantity }}</li>
+  {% empty %}
+    <li>No sales available.</li>
+  {% endfor %}
+</ul>
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+{% for store in stores %}
+        <div class="col-lg-4">
+        <div class="card text-center mb-3">
+            <a href="{% url 'profit_loss' store_id=store.id %}" style="text-decoration: none;color: black;">
+            <div class="card-body">
+                <h5>{{store.name}}</h5>
+                <p>{{store.address}}</p>
+                <button class="btn btn-light btn-sm">View Store</button>
+            </div>
+            </a>
+        </div>
+        </div>
+{% endfor %}
+  </div>
+
+</div>
+
+    
+ 
+
+{% include 'inventory/chart.html' %}
+    
+{% endblock %}
+    

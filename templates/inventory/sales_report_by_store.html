@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+    
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="container">
+    <h1 class="text-center">Sales Report by Store</h1>
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+    <table class="table table-bordered">
+        <tr>
+            <th>Store</th>
+            <th>Total Quantity</th>
+            <th>Total Revenue</th>
+        </tr>
+        {% for item in data %}
+        <tr>
+            <td>{{ item.store }}</td>
+            <td>{{ item.total_quantity }}</td>
+            <td>{{ item.total_revenue|intcomma }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+        </div>
+   <div class="col-lg-9">
+    <canvas id="barChart"></canvas>
+   </div>
+    <script>
+        const labels = [
+            {% for item in data %}
+            "{{ item.store }}",
+            {% endfor %}
+        ];
+
+        const quantities = [
+            {% for item in data %}
+            {{ item.total_quantity }},
+            {% endfor %}
+        ];
+
+        const revenues = [
+            {% for item in data %}
+            {{ item.total_revenue }},
+            {% endfor %}
+        ];
+
+        const ctx = document.getElementById('barChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Total Quantity',
+                        data: quantities,
+                        backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)'
+                            ],
+                        
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Total Revenue',
+                        data: revenues,
+                        backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)'
+                            ],
+                        
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    </div>
+    </div>
+{% endblock content %}

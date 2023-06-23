@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+<style>
+    .card{
+        box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+    }
+</style>
+
+    
+<div class="container">
+    <h1 class="text-center">Stores Purchase Summary</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+    <table class="table table-bordered">
+        <tr>
+            <th>Store</th>
+            <th>Total Value</th>
+        </tr>
+        {% for store_total in store_totals %}
+            <tr>
+                <td>{{ store_total.store__name }}</td>
+                <td>{{ store_total.total_value|intcomma }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    
+
+    <div class="row pt-5">
+        <h2>Total Stock Purchases</h2>
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <h5>Daily: {{ day_total.total }}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <h5>Weekly: {{ week_total.total }}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5>Monthly: {{ month_total.total }}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5>Yearly: {{ year_total.total }}</h5>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+
+ 
+   
+        </div>
+    </div>
+</div>
+{% endblock %}

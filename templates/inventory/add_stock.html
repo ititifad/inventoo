@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card px-3 py-3">
+  <h2 class="text-center">Add Stock</h2>
+
+<form method="POST">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Store</label>
+  <select name="store" id="store" class="form-select">
+    <option selected>Select Store</option>
+    {% for store in stores %}
+      <option value="{{ store.id }}">{{ store.name }}</option>
+    {% endfor %}
+  </select></div>
+ 
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Product</label>
+  <select name="product" id="product" class="form-select">
+    <option selected>Select Product</option>
+    {% for product in products %}
+      <option value="{{ product.id }}">{{ product.name }}</option>
+    {% endfor %}
+  </select></div>
+ 
+  <label for="quantity">Quantity:</label>
+  <input type="number" name="quantity" id="quantity" class="form-control" required>
+  <br>
+  <input type="submit" value="Add Stock" class="btn btn-primary btn-lg">
+</form>
+
+        </div>
+        </div>
+</div>
+</div>
+{% endblock %}

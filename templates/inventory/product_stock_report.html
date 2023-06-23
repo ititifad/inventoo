@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    
+<div class="container">
+    <h1>Product Stock Report</h1>
+    <div class="row">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Store</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock_item in stock_items %}
+            <tr>
+                <td>{{ stock_item.product.name }}</td>
+                <td>{{ stock_item.store.name }}</td>
+                <td>{{ stock_item.quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}

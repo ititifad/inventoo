@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<div class="container">
+    <h1>Sell Product</h1>
+<h2>Store: {{ store.name }}</h2>
+<h3>Product: {{ product.name }}</h3>
+   
+        <p>Available Stock: {{product.stock}}</p>
+       
+<h3>Total Price: {{ total_price }}</h3>
+
+         
+  
+    
+    <h1 class="text-center">Sell {{ product.name }} - {{product.stock}}</h1>
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card px-3 py-2">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Quantity</label>
+                    <input type="number" class="form-control"  name="quantity" id="quantity" min="1" max="{{ product.stock }}" placeholder="Add Product Quantity" required>
+                </div>
+                
+                <br>
+                <input type="submit" value="Sell product" class="btn btn-success btn-lg">
+              </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+{% endblock %}

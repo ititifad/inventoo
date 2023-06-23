@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+
+<!-- <h1>{{ store.name }} Products</h1>
+<ul>
+  {% for product in products %}
+    <li>{{ product.name }} - Stock: {{ product.stock }}</li>
+    <ul>
+      <li><a href="{% url 'purchase_product' store_id=store.id product_id=product.id %}">Purchase</a></li>
+      <li><a href="{% url 'sell_product' store_id=store.id product_id=product.id %}">Sell</a></li>
+    </ul>
+  {% endfor %}
+</ul> -->
+
+<div class="container">
+    <h1 class="text-center">{{ store.name }} Products</h1>
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Store</th>
+                        <th>Stock</th>
+                        <th>Purchase</th>
+                        <th>Sell Product</th>
+                    </tr>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{product.name}}</td>
+                        <td>{{product.store.name}}</td>
+                        <td>{{product.stock}}</td>
+                        <td><a href="{% url 'purchase_product' store_id=store.id product_id=product.id %}" class="btn btn-warning btn-sm">Purchase</a></td>
+                        <td><a href="{% url 'sell_product' store_id=store.id product_id=product.id %}" class="btn btn-success btn-sm">Sell Product</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

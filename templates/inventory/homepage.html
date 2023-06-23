@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+
+{% block content %}
+
+<style>
+    .card{
+        box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+  <div class="col-lg-8" style="background-color: rgb(240, 240, 240);">
+    <canvas id="stockChart"></canvas>
+  </div>
+ 
+  <div class="col-lg-3">
+    <!-- <div class="card"> -->
+        <!-- <div class="card-body"> -->
+            <div class="card mb-2">
+                <div class="card-body text-center">
+                    <h6><i class="fa-sharp fa-solid fa-store position-absolute top-1 start-0 px-2"></i>
+                        Geita Store Stock: {{geita_store_stock}}</h6>
+                </div>
+            </div>
+            <div class="card mb-2">
+                <div class="card-body text-center">
+                    <h6><i class="fa-sharp fa-solid fa-store position-absolute top-1 start-0 px-2"></i>
+                        Mwanza Store Stock: {{mwanza_store_stock}}</h6>
+
+                </div>
+            </div>
+            <div class="card mb-2">
+                <div class="card-body text-center">
+                    <h6><i class="fa-solid fa-money-bill-1 position-absolute top-1 start-0 px-2"></i>
+                        Purchase Value: {{total_purchase_value|intcomma}}</h6>
+                </div>
+            </div>
+            <div class="card mb-2">
+                <div class="card-body text-center">
+                    <h6><i class="fa-solid fa-money-bill-1 position-absolute top-1 start-0 px-2"></i>
+                        Sales Value: {{total_sales_value|intcomma}}</h6>
+                </div>
+            </div>
+            <!-- <div class="card">
+                <div class="card-body text-center">
+                    <h6>Total Profit: {{total_profit|intcomma}}</h6>
+                </div>
+            </div> -->
+        <!-- </div> -->
+    <!-- </div> -->
+  </div>
+
+  <div class="col-lg-6 pt-5">
+    <h4 class="text-center">Most Recent Sales</h4>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-sm">
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total Price</th>
+                <th>Sale Date</th>
+              
+            </tr>
+            {% for sale in sales %}
+            <tr>
+                <td>{{sale.product.name}}</td>
+                <td>{{sale.quantity}}</td>
+                <td>{{sale.unit_price|intcomma}}</td>
+                <td>{{sale.get_total_price|intcomma}}</td>
+                <td>{{sale.sale_date|date}}</td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+  </div>
+  <div class="col-lg-6 pt-5">
+    <h4 class="text-center">Most Recent Purchases</h4>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-sm">
+            <tr>
+                <th>Product Name</th>
+                <th>Supplier</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total Price</th>
+                <th>Date Purchased</th>
+         
+            </tr>
+            {% for product in purchases %}
+            <tr>
+                <td>{{product.product.name}}</td>
+                <td>{{product.supplier}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.unit_price|intcomma}}</td>
+                <td>{{product.get_total_price|intcomma}}</td>
+                <td>{{product.purchase_date|date}}</td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+  </div>
+
+    </div>
+
+
+   
+</div>
+
+{% include 'inventory/chart.html' %}
+
+
+   
+  
+
+    
+{% endblock %}
+    

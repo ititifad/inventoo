@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+
+{% block content %}
+<style>
+    .card{
+        box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+    }
+</style>
+
+<div class="container">
+    
+    <h1 class="text-center">{{ store.name }} Profit/Loss Report</h1>
+    <div class="row justify-content-center">
+        <div class="col-lg-3">
+    <div class="card mb-2">
+        <div class="card-body">
+        <p><strong>Total Purchases</strong>: {{ total_purchases|intcomma }}</p>
+        </div>
+    </div>
+    </div>
+    <div class="col-lg-3">
+    <div class="card mb-2">
+        <div class="card-body">
+        <p><strong>Total Sales</strong>: {{ total_sales|intcomma }}</p>
+        </div>
+    </div>
+    </div>
+    <div class="col-lg-3">
+    <div class="card mb-2">
+        <div class="card-body">
+        <p><strong>Stock Value</strong>: {{ stock_value|intcomma }}</p>
+        </div>
+    </div>
+    </div>
+    <div class="col-lg-3">
+    <div class="card">
+        <div class="card-body">
+        <p><strong>Profit/Loss</strong>: {{ profit_loss|intcomma }}</p>
+        </div>
+    </div>
+    </div>
+    </div>
+<!-- <p>Total Purchases: {{ total_purchases }}</p>
+<p>Total Sales: {{ total_sales }}</p>
+<p>Stock Value: {{ stock_value }}</p>
+<p>Profit/Loss: {{ profit_loss }}</p> -->
+    
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+            <h1>Purchases</h1>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-sm">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Purchase Date</th>
+                        
+                    </tr>
+                    {% for purchase in purchases %}
+                    <tr>
+                        <td>{{ purchase.product.name }}</td>
+                        <td>{{purchase.quantity}}</td>
+                        <td>{{purchase.unit_price}}</td>
+                        <td>{{purchase.purchase_date}}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="col-lg-8 pt-5">
+            <h1>Sales</h1>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-sm">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Sell Date</th>
+                        
+                    </tr>
+                    {% for sale in sales %}
+                    <tr>
+                        <td>{{ sale.product.name }}</td>
+                        <td>{{sale.quantity}}</td>
+                        <td>{{sale.unit_price}}</td>
+                        <td>{{sale.sale_date}}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+<br>
+        <div class="col-lg-8 pt-5">
+            <h1>Stock</h1>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-sm">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        
+                        
+                    </tr>
+                    {% for stock_item in stock %}
+                    <tr>
+                        <td>{{stock_item.product.name}}</td>
+                        <td>{{stock_item.quantity}}</td>
+                        
+                        
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+<!-- inventory/templates/inventory/profit_loss.html -->
+
+
+
+
+<!-- <p>Total Purchases: {{ total_purchases }}</p>
+<p>Total Sales: {{ total_sales }}</p>
+<p>Stock Value: {{ stock_value }}</p>
+<p>Profit/Loss: {{ profit_loss }}</p> -->
+
+
+{% endblock %}

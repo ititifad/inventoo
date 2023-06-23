@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Sales Report</h1>
+
+ 
+        <h1>Total Monetary Value for Each Store</h1>
+        <ul>
+            {% for store_total in store_totals %}
+                <li>{{ store_total.store.address }}: {{ store_total.total }}</li>
+            {% endfor %}
+        </ul>
+    
+        <h1>Total Purchases</h1>
+        <ul>
+            <li>Day: {{ day_total.total }}</li>
+            <li>Week: {{ week_total.total }}</li>
+            <li>Month: {{ month_total.total }}</li>
+            <li>Year: {{ year_total.total }}</li>
+        </ul>
+   
+    
+</div>
+{% endblock %}
